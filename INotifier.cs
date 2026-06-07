@@ -14,6 +14,8 @@ namespace vPilot_Pushover {
         public string settingTelegramChatId { get; set; }
         public string settingGotifyUrl { get; set; }
         public string settingGotifyToken { get; set; }
+        public string settingDiscordBotToken { get; set; }
+        public string settingDiscordUserId { get; set; }
     }
 
     internal interface INotifier {

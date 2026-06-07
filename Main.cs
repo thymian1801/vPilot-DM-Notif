@@ -40,6 +40,8 @@ namespace vPilot_Pushover {
         private String settingTelegramChatId = null;
         private String settingGotifyUrl = null;
         private String settingGotifyToken = null;
+        private String settingDiscordBotToken = null;
+        private String settingDiscordUserId = null;
 
         /*
          * 
@@ -101,6 +103,23 @@ namespace vPilot_Pushover {
                     }
 
                     sendDebug("Driver set to Gotify");
+                } else if (settingDriver.ToLower() == "discord") {
+                    notifier = new Drivers.Discord();
+
+                    NotifierConfig config;
+                    config = new NotifierConfig
+                    {
+                        settingDiscordBotToken = settingDiscordBotToken,
+                        settingDiscordUserId = settingDiscordUserId
+                    };
+                    notifier.init(config);
+                    if (!notifier.hasValidConfig())
+                    {
+                        sendDebug("Discord bot token or user ID not set. Check your vPilot-Pushover.ini");
+                        return;
+                    }
+
+                    sendDebug("Driver set to Discord");
                 } else {
                     sendDebug("Driver not set correctly. Check your vPilot-Pushover.ini");
                     return;
@@ -233,6 +252,8 @@ namespace vPilot_Pushover {
                 settingDisconnectEnabled = settingsFile.KeyExists("Enabled", "Disconnect") ? Boolean.Parse(settingsFile.Read("Enabled", "Disconnect")) : false;
                 settingGotifyUrl = settingsFile.KeyExists("Url", "Gotify") ? settingsFile.Read("Url", "Gotify") : null;
                 settingGotifyToken = settingsFile.KeyExists("Token", "Gotify") ? settingsFile.Read("Token", "Gotify") : null;
+                settingDiscordBotToken = settingsFile.KeyExists("BotToken", "Discord") ? settingsFile.Read("BotToken", "Discord") : null;
+                settingDiscordUserId = settingsFile.KeyExists("UserId", "Discord") ? settingsFile.Read("UserId", "Discord") : null;
 
                 // Validate values
                 if (settingHoppieEnabled && settingHoppieLogon == null) {

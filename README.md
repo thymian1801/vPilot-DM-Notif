@@ -1,7 +1,7 @@
 # vPilot Pushover
 [![Github All Releases](https://img.shields.io/github/downloads/blt950/vPilot-Pushover/total.svg)]()
 
-Relay [vPilot](https://vpilot.rosscarlson.dev/) and [Hoppie](https://www.hoppie.nl/acars/) messages to your mobile device via [Pushover](https://pushover.net/), [Telegram](https://telegram.org/) or [Gotify](https://gotify.net/).\
+Relay [vPilot](https://vpilot.rosscarlson.dev/) and [Hoppie](https://www.hoppie.nl/acars/) messages to your mobile device via [Pushover](https://pushover.net/), [Telegram](https://telegram.org/), [Gotify](https://gotify.net/) or [Discord](https://discord.com/).\
 Hoppie is integrated directly, meaning you can use any aircraft with this plugin.
 
 ![Image of example notification of contact me](https://github.com/blt950/vPilot-Pushover/assets/2505044/68653e8a-8bca-45d4-8220-4a38f39d68d4)
@@ -23,6 +23,12 @@ You need [vPilot](https://vpilot.rosscarlson.dev/) that you use to connect to VA
 - It's required to install gotify server beforehand. Check [Gotify Docs](https://gotify.net/docs/index) for more infomation
 - Please note that only Android phone is officially supported by them. See [this](https://github.com/gotify/android)
 
+### Discord
+- [Create a Discord application and bot](https://discord.com/developers/applications) and copy the bot token (Bot → Reset Token)
+- Invite the bot to a server you are also a member of (the bot only needs to share one server with you in order to DM you). No special permissions or privileged intents are required to send direct messages.
+- Make sure you allow direct messages from server members (User Settings → Privacy & Safety, or the per-server privacy setting), otherwise Discord will block the bot's DM
+- Get your own Discord user ID by enabling Developer Mode (User Settings → Advanced), then right-click your name → Copy User ID
+
 ## Installation
 
 1. Make sure your vPilot is not running
@@ -35,7 +41,7 @@ You need [vPilot](https://vpilot.rosscarlson.dev/) that you use to connect to VA
 In the `vPilot-Pushover.ini` file, you can configure the following settings:
 
 ### [General]
-`Driver` = Choose your notifier method, write `pushover`, `telegram` or `gotify` in lowercase.
+`Driver` = Choose your notifier method, write `pushover`, `telegram`, `gotify` or `discord` in lowercase.
 
 ### [Pushover]
 `UserKey` = Your Pushover user key. You can find this on the [Pushover dashboard](https://pushover.net/)\
@@ -49,6 +55,10 @@ In the `vPilot-Pushover.ini` file, you can configure the following settings:
 ### [Gotify]
 `Url` = Your Gotify server address. For example, `https://push.example.com`, `https://example.com/gotify`, depending on your server configuration.\
 `Token` = Your Gotify application token. see [this](https://gotify.net/docs/pushmsg)
+
+### [Discord]
+`BotToken` = Your Discord bot token, from your [application's](https://discord.com/developers/applications) Bot page\
+`UserId` = Your Discord user ID (the recipient of the direct messages). Enable Developer Mode, then right-click your name → Copy User ID
 
 ### [Hoppie]
 `Enabled` = Whether or not to relay Hoppie messages. Set to `true` or `false`\
